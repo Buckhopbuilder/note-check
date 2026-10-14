@@ -1,0 +1,8 @@
+Neural serial recognition uses the ch_PP-OCRv4_rec_infer.onnx model distributed in rapidocr-onnxruntime 1.4.4.
+Upstream model: PaddleOCR (Baidu/PaddlePaddle contributors), Apache License 2.0.
+Conversion/distribution: RapidAI/RapidOCR, Apache License 2.0.
+https://github.com/RapidAI/RapidOCR
+https://github.com/PaddlePaddle/PaddleOCR
+ONNX Runtime Web 1.20.1: Microsoft and contributors, MIT License.
+https://github.com/microsoft/onnxruntime
+Model confidence is an internal model score, not a calibrated probability of a correct serial or a valuation.
