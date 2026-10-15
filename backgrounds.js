@@ -10,16 +10,17 @@
   layers.forEach(img => { img.alt = ''; img.decoding = 'async'; backdrop.append(img); });
   document.querySelector('.intro').prepend(backdrop);
   let paused = motion.matches, timer, current = 0, active = 0, busy = false;
+  let eggActive = false, eggTimer, eggToken = 0;
   function source(index) { return `backgrounds/${scenes[index]}.webp`; }
   async function advance() {
-    if (paused || document.hidden || busy) return;
+    if (paused || document.hidden || busy || eggActive) return;
     busy = true;
     const next = (current + 1) % scenes.length;
     const layer = layers[1 - active];
     layer.src = source(next);
     try {
       await layer.decode();
-      if (!paused && !document.hidden) {
+      if (!paused && !document.hidden && !eggActive) {
         layer.classList.add('visible');
         layers[active].classList.remove('visible');
         current = next; active = 1 - active;
@@ -29,12 +30,57 @@
   }
   function schedule() {
     clearInterval(timer);
-    if (!paused && !document.hidden) timer = setInterval(advance, 5000);
+    if (!paused && !document.hidden && !eggActive) timer = setInterval(advance, 5000);
   }
   layers[0].src = source(0);
   layers[0].classList.add('visible');
   document.addEventListener('visibilitychange', schedule);
   motion.addEventListener('change', () => { paused = motion.matches; schedule(); });
+
+  // This image is intentionally absent from scenes and only loads on discovery.
+  const secret = document.createElement('img');
+  secret.alt = '';
+  secret.className = 'secret-slide';
+  secret.decoding = 'async';
+  backdrop.append(secret);
+  const trigger = document.createElement('button');
+  trigger.type = 'button';
+  trigger.className = 'ride-texture';
+  trigger.setAttribute('aria-label', 'Take the ultimate ride');
+  trigger.setAttribute('aria-pressed', 'false');
+  document.querySelector('.intro').insertBefore(trigger, backdrop.nextSibling);
+  function finishRide() {
+    eggToken++;
+    clearTimeout(eggTimer);
+    secret.classList.remove('visible');
+    eggActive = false;
+    trigger.setAttribute('aria-pressed', 'false');
+    schedule();
+  }
+  async function showRide() {
+    if (eggActive) { finishRide(); return; }
+    eggActive = true;
+    const token = ++eggToken;
+    clearInterval(timer);
+    secret.src = 'backgrounds/ultimate-ride.webp';
+    try {
+      await secret.decode();
+      if (token !== eggToken || document.hidden) {
+        if (token === eggToken) finishRide();
+        return;
+      }
+      secret.classList.add('visible');
+      trigger.setAttribute('aria-pressed', 'true');
+      eggTimer = setTimeout(finishRide, 3000);
+    } catch (_) {
+      if (token === eggToken) finishRide();
+    }
+  }
+  trigger.addEventListener('click', showRide);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && eggActive) finishRide();
+  });
+
   const rain = document.createElement('div');
   rain.className = 'money-rain';
   rain.setAttribute('aria-hidden', 'true');

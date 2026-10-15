@@ -5,9 +5,9 @@
 <meta name="theme-color" content="#132c28"><title>Coin Check · Note Check</title>
 <link rel="stylesheet" href="style.css?v=12">
 <style>.coinPanel{margin-top:14px}.coinFields{display:grid;grid-template-columns:1fr 1fr;gap:12px}.coinFields .wide{grid-column:1/-1}.coinPanel ul{padding-left:20px;font-size:12px;line-height:1.7}.coinPanel a{color:#176d50}.coinPanel button{width:100%;margin-top:16px}.coinNav{font-size:12px;color:#176d50}.coinResult p{font-size:12px}.coinResult h4{font-size:12px;margin:16px 0 5px}.coinResult ul{margin:5px 0}.coinResult li{margin:7px 0}@media(max-width:400px){.coinFields{grid-template-columns:1fr}}</style>
-<link rel="stylesheet" href="backgrounds.css?v=4"></head>
+<link rel="stylesheet" href="backgrounds.css?v=6"></head>
 <body>
-<header><span class="page-category">Australian coins · manual check</span><a class="brand" href="./"><span class="brand-title">SEARCHER</span><span class="brand-tagline">What is he searching for?</span></a><a class="coinNav" href="./">Banknote scanner</a></header>
+<header><span class="page-category">Australian coins · manual check</span><a class="brand" href="./"><span class="brand-the">THE</span><span class="brand-title">SEARCHER</span><span class="brand-tagline">What's he searching for?</span></a><a class="coinNav" href="./">Banknote scanner</a></header>
 <main>
 <section class="intro"></section>
 <section class="panel coinPanel">
@@ -85,4 +85,4 @@ year.addEventListener('input',reset);design.addEventListener('change',reset);
 document.getElementById('coinForm').addEventListener('submit',event=>{event.preventDefault();show(checkCoin(denomination.value,year.value.trim(),design.value));});
 })();
 </script>
-<script src="backgrounds.js?v=5" defer></script></body></html>
+<script src="backgrounds.js?v=6" defer></script></body></html>
