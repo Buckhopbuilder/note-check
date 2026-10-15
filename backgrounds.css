@@ -1,7 +1,7 @@
 /* Decorative elements remain behind opaque checking sections. */
 :root { --ink:#092c70; --green:#174cab; --mint:#e4edff; }
 body { background:#063a96; isolation:isolate; }
-body::before { content:'';position:fixed;inset:0;z-index:-3;pointer-events:none;background:linear-gradient(145deg,transparent 35%,#ffffff12 35%,#ffffff12 43%,transparent 43%),linear-gradient(35deg,#00235d,#0753be 58%,#103d8c); }
+body::before { content:'';position:fixed;inset:0;z-index:-3;pointer-events:none;background:linear-gradient(145deg,transparent 45%,#f6f9ff 45%,#f6f9ff 53%,transparent 53%,transparent 57%,#ffffffd9 57%,#ffffffd9 60%,transparent 60%),linear-gradient(35deg,#00235d,#0753be 58%,#103d8c); }
 .money-rain { position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:-2; }
 .money-rain img { position:absolute;left:var(--x);top:-90px;width:64px;height:auto;opacity:.25;animation:cashfall var(--duration) linear var(--delay) infinite; }
 @keyframes cashfall { from { transform:translate3d(-30px,-80px,0) rotate(var(--tilt)); } to { transform:translate3d(55px,calc(100vh + 180px),0) rotate(calc(var(--tilt) + 140deg)); } }
@@ -15,7 +15,7 @@ header { display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:12px 18
 .coinNav { margin-left:auto;color:#fff;font-size:11px; }
 main { padding-top:0; }
 .intro { padding:0 0 16px;min-height:0;display:block; }
-.adventure-background { position:relative;width:100%;aspect-ratio:3/2;overflow:hidden;border-radius:18px;background:#082c64;box-shadow:0 8px 26px #001d5444;border:1px solid #ffffff40;pointer-events:none; }
+.adventure-background { position:relative;width:100%;aspect-ratio:3/2;overflow:hidden;border-radius:0;background:transparent;box-shadow:none;border:0;-webkit-mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent),linear-gradient(to bottom,transparent,#000 8%,#000 90%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent),linear-gradient(to bottom,transparent,#000 8%,#000 90%,transparent);mask-composite:intersect;pointer-events:none; }
 .adventure-background img { position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 2.2s ease-in-out; }
 .adventure-background img.visible { opacity:1; }
 .intro p { margin:12px 0 0!important;background:none;padding:0; }

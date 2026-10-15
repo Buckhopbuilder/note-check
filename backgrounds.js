@@ -29,7 +29,7 @@
   }
   function schedule() {
     clearInterval(timer);
-    if (!paused && !document.hidden) timer = setInterval(advance, 10000);
+    if (!paused && !document.hidden) timer = setInterval(advance, 5000);
   }
   layers[0].src = source(0);
   layers[0].classList.add('visible');
