@@ -43,12 +43,9 @@
   secret.className = 'secret-slide';
   secret.decoding = 'async';
   backdrop.append(secret);
-  const trigger = document.createElement('button');
-  trigger.type = 'button';
-  trigger.className = 'ride-texture';
-  trigger.setAttribute('aria-label', 'Take the ultimate ride');
+  const trigger = document.querySelector('.brand-tagline');
+  trigger.setAttribute('aria-label', "What's he searching for? Reveal the ultimate ride");
   trigger.setAttribute('aria-pressed', 'false');
-  document.querySelector('.intro').insertBefore(trigger, backdrop.nextSibling);
   function finishRide() {
     eggToken++;
     clearTimeout(eggTimer);

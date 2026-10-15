@@ -42,8 +42,12 @@ html,body { overflow-x:clip; }
 /* Quiet, keyboard-accessible surf-texture Easter egg. */
 .brand-the { font:800 11px/1.1 system-ui,sans-serif;letter-spacing:4px;color:#fff;margin-left:3px; }
 .intro { position:relative; }
-.ride-texture { display:block;position:relative;z-index:2;margin:-52px 8px 8px auto;width:44px;height:44px;min-height:44px;padding:0;border:0;border-radius:50%;background:repeating-linear-gradient(155deg,transparent 0 5px,#fff 6px 7px,transparent 8px 12px);opacity:.13;cursor:pointer;box-shadow:none; }
-.ride-texture:hover { opacity:.3; }
-.ride-texture:focus-visible { opacity:.65;outline:3px solid #fff;outline-offset:3px; }
 .adventure-background img.secret-slide { z-index:3;transition:opacity .12s ease-out; }
 @media(prefers-reduced-motion:reduce) { .adventure-background img.secret-slide { transition:none; } }
+
+/* The title is plain text; only the tagline reveals the secret slide. */
+button.brand-tagline { appearance:none;display:block;background:none;border:0;border-radius:3px;box-shadow:none;padding:0;margin:0;min-height:28px;min-width:0;text-align:left;font:500 10px/1.4 system-ui,sans-serif;letter-spacing:.2px;color:#dbe9ff;cursor:pointer; }
+button.brand-tagline:hover { filter:none; }
+button.brand-tagline:active { transform:none; }
+button.brand-tagline:focus-visible { outline:2px solid #fff;outline-offset:4px; }
+@media(max-width:360px) { button.brand-tagline {font-size:9px;} }
