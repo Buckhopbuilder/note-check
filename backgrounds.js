@@ -1,7 +1,7 @@
 /* Decorative only: no scanner, serial, result or coin-check dependencies. */
 (() => {
   'use strict';
-  const scenes = ['trex', 'bathurst', 'shark', 'commando', 'cyborg', 'emperor'];
+  const scenes = ['trex', 'crocodiles', 'bathurst', 'space', 'shark', 'farm', 'commando', 'cage', 'cyborg', 'bears', 'emperor', 'kraken'];
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const backdrop = document.createElement('div');
   backdrop.className = 'adventure-background';
