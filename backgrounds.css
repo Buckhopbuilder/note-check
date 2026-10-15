@@ -27,3 +27,14 @@ button.primary { background:#103f91;border-color:#103f91; }
 button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible { outline-color:#438aff; }
 @media(max-width:360px) { header { gap:8px; }.brand-title {font-size:29px;}.brand-tagline{font-size:9px;}.soundButton{padding:8px;}.soundButton span{font-size:10px;} }
 @media(prefers-reduced-motion:reduce) { .adventure-background img {transition:none;}.money-rain{display:none;} }
+
+/* Full-width artwork with the existing feathered mask. */
+.adventure-background { width:100vw; max-width:none; margin-left:calc(50% - 50vw); }
+html,body { overflow-x:clip; }
+.view { background:#092959; }
+#placeholder { color:#f3f7ff; }
+#placeholder p { color:#bed1ef; }
+.cameraicon { color:#d3e3ff; }
+.frame { border-color:#b8d2ff99; box-shadow:0 0 0 150px #03133125; }
+.viewlabel { color:#d5e4ff; }
+#cameraState { color:#355a90; border-color:#d9e4f6; background:#f0f5fd; }
