@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#132c28"><title>Coin Check · Note Check</title>
+<link rel="stylesheet" href="style.css?v=12">
+<style>.coinPanel{margin-top:14px}.coinFields{display:grid;grid-template-columns:1fr 1fr;gap:12px}.coinFields .wide{grid-column:1/-1}.coinPanel ul{padding-left:20px;font-size:12px;line-height:1.7}.coinPanel a{color:#176d50}.coinPanel button{width:100%;margin-top:16px}.coinNav{font-size:12px;color:#176d50}.coinResult p{font-size:12px}.coinResult h4{font-size:12px;margin:16px 0 5px}.coinResult ul{margin:5px 0}.coinResult li{margin:7px 0}@media(max-width:400px){.coinFields{grid-template-columns:1fr}}</style>
+</head>
+<body>
+<header><a class="brand" href="./"><span class="mark">N✓</span> NOTE CHECK</a><a class="coinNav" href="./">Banknote scanner</a></header>
+<main>
+<section class="intro"><span class="eyebrow"><span class="tinyDot"></span> AUSTRALIAN COINS · MANUAL CHECK</span><h1>Coin checker</h1><p>A small watchlist to help you decide what deserves a closer look.</p></section>
+<section class="panel coinPanel">
+<h2>Enter the coin details</h2>
+<p class="small">Read the date on the portrait side and the design on the other side. This version does not analyse photos.</p>
+<form id="coinForm">
+<div class="coinFields">
+<div><label for="coinDenomination">Denomination</label><select id="coinDenomination"><option value="">Choose denomination</option value="5">5c</option><option value="10">10c</option><option value="20">20c</option><option value="50">50c</option><option value="100">$1</option><option value="200">$2</option></select></div>
+<div><label for="coinYear">Year stamped on coin</label><input id="coinYear" inputmode="numeric" type="text" maxlength="4" placeholder="e.g. 2000" autocomplete="off"></div>
+<div class="wide"><label for="coinDesign">Design / shape</label><select id="coinDesign" disabled><option value="">Choose denomination first</option></select></div>
+</div>
+<button class="primary" type="submit">Check coin</button>
+</form>
+<div id="coinResult" class="result neutral coinResult" role="status" aria-live="polite"><span class="symbol">—</span><div><h3>Ready to check</h3><p>Enter the denomination, year and design.</p></div></div>
+</section>
+<details class="panel coverage"><summary>Exactly what this version checks</summary>
+<ul><li>1966 platypus 20c: wavy-baseline inspection.</li><li>1966 round 50c: original silver issue.</li><li>1993 coat-of-arms 50c: lower-mintage issue.</li><li>2000 Millennium flag 50c: incuse-flag inspection.</li><li>2000 five-kangaroos $1: mule inspection.</li><li>2001 Centenary of Federation $1: rotation inspection.</li></ul>
+<p class="small">This is a limited watchlist, not a complete Australian coin catalogue. 5c, 10c, $2 and unlisted designs are unsupported. Mintmarks, other varieties, general minting errors, condition and authenticity are not assessed. A flag does not establish rarity, collector demand or value.</p>
+</details>
+<footer>Manual screening · No valuations · No paid service</footer>
+</main>
+<script>
+(function(){
+'use strict';
+const definitions={
+'5':[['other','Other / unsupported']],
+'10':[['other','Other / unsupported']],
+'20':[['platypus','Platypus'],['other','Other / not sure']],
+'50':[['coat','Coat of arms · twelve-sided'],['round','Coat of arms · round'],['millennium','Millennium flag'],['other','Other / not sure']],
+'100':[['roos','Five kangaroos'],['federation','Centenary of Federation · 2001'],['other','Other / not sure']],
+'200':[['other','Other / unsupported']]
+};
+const research='https://numismatics.org.au/wp-content/uploads/2021/06/vol-27-harris.pdf';
+const mint50='https://www.ramint.gov.au/collect/national-coin-collection/circulating-coins/fifty-cents';
+const rules=[
+{denomination:'20',year:1966,design:'platypus',title:'Check for the wavy-baseline variety',reason:'Some 1966 platypus 20c coins have a distinguishing detail around the base of the 2. The date alone does not identify the variety.',steps:['Look at the upper edge of the bottom stroke of the 2 in 20. Compare it with the normal straight edge.','Look for the corresponding curve in the water line immediately above it. A bump or damage alone is not enough.','Use a magnifier or a sharp close-up. If the detail is unclear, keep the result unconfirmed.'],source:'https://www.perthmint.com/news/collector/coin-collecting/how-to-identify-australias-exceptionally-rare-wavy-baseline-20-cents-coin/',label:'Perth Mint identification guide'},
+{denomination:'50',year:1966,design:'round',title:'Set aside for a closer look',reason:'The original 1966 round 50c issue was made from 80% silver. The details you entered match that issue; this checker cannot verify the coin or its metal.',steps:['Confirm that the date is 1966, the shape is round and the reverse shows the coat of arms.','Do not infer silver content from colour alone. If authenticity is uncertain, have the coin examined.'],source:mint50,label:'Royal Australian Mint · 50c'},
+{denomination:'50',year:1993,design:'coat',title:'Lower-mintage issue · inspect condition',reason:'The Royal Australian Mint lists 1 million standard 50c coins for 1993. This is a reason to inspect the coin, not proof that a circulated example has a premium.',steps:['Confirm 1993 on the portrait side and the standard coat of arms on the reverse.','Inspect wear, scratches, dents and other damage. Do not clean or polish the coin.'],source:mint50,label:'Royal Australian Mint · mintage figures'},
+{denomination:'50',year:2000,design:'millennium',title:'Check for the incuse-flag variety',reason:'The 2000 Millennium design has normal and incuse-flag versions. Recognising the design does not distinguish them.',steps:['Inspect the crosses of Saint George and Saint Patrick within the Union Jack. On the variety these details are recessed; on the normal issue they are raised.','Compare with documented examples under angled light. The Commonwealth star surface provides a supporting detail.','If shadows or wear make the relief ambiguous, do not treat the variety as confirmed.'],source:'https://www.pcgs.com/news/australian-2000-millennium-50-cent-with-incused-flag',label:'PCGS · normal and incuse examples'},
+{denomination:'100',year:2000,design:'roos',title:'Check the portrait-side rim for a mule',reason:'Some 2000 five-kangaroos dollars were struck with a 10c portrait-side die. This entry only flags the possibility.',steps:['Look for the stepped double rim around the portrait-side circumference.','A partial double rim can occur on an ordinary slightly off-centre strike. It does not by itself establish a mule.','Compare with the reference photographs; seek expert confirmation for a suspected match.'],source:'https://www.pcgs.com/news/2000-australian-1-dollar-mule-error-coin',label:'PCGS · mule identification guide'},
+{denomination:'100',year:2001,design:'federation',title:'Check the alignment of the two sides',reason:'Rotated-die examples are documented for the 2001 Centenary of Federation dollar. The date and design alone do not show a rotation.',steps:['Hold the design side upright. Turn the coin left-to-right around its vertical axis, keeping the top edge at the top.','The portrait side should also be upright. An unexpected angle is a reason for further inspection.','Two photos taken with independently changed orientations cannot establish the alignment.'],source:research,label:'Numismatic Association of Australia · rotation guide'}
+];
+function checkCoin(denomination,yearText,design){
+if(!definitions[denomination]||!/^[0-9]{4}$/.test(yearText)||!definitions[denomination].some(x=>x[0]===design))return {status:'unknown',title:'Check the details',reason:'Choose a denomination and design, and enter the four-digit year stamped on the coin.'};
+const year=Number(yearText),first={'5':1966,'10':1966,'20':1966,'50':1966,'100':1984,'200':1988}[denomination];
+if(year<first||year>new Date().getFullYear())return {status:'unknown',title:'Year needs confirmation',reason:'That year is outside the supported decimal issue dates for this denomination. Check the date again.'};
+const match=rules.find(r=>r.denomination===denomination&&r.year===year&&r.design===design);
+if(match)return {status:'keep',...match};
+if(design==='other'||['5','10','200'].includes(denomination))return {status:'unknown',title:'Not covered by this watchlist',reason:'This denomination or design is unsupported. No conclusion about the coin was made.'};
+if((design==='round'&&year!==1966)||(design==='millennium'&&year!==2000)||(design==='federation'&&year!==2001))return {status:'unknown',title:'Confirm the year and design',reason:'These details do not match the issue covered by this checker. Check both sides; the coin may be unsupported.'};
+return {status:'neutral',title:'No supported flag found',reason:'No entry in this small watchlist matches these details. Other varieties, mintmarks and minting errors have not been checked. This is not a recommendation to spend the coin.'};
+}
+const denomination=document.getElementById('coinDenomination'),year=document.getElementById('coinYear'),design=document.getElementById('coinDesign'),result=document.getElementById('coinResult');
+function show(r){
+result.className='result coinResult '+r.status;result.replaceChildren();
+const icon=document.createElement('span');icon.className='symbol';icon.textContent=r.status==='keep'?'✓':r.status==='unknown'?'?':'—';
+const body=document.createElement('div'),heading=document.createElement('h3'),paragraph=document.createElement('p');heading.textContent=r.title;paragraph.textContent=r.reason;body.append(heading,paragraph);
+if(r.steps){const h=document.createElement('h4');h.textContent='What to look for';const ul=document.createElement('ul');for(const step of r.steps){const li=document.createElement('li');li.textContent=step;ul.append(li);}body.append(h,ul);}
+if(r.source){const links=document.createElement('div');links.className='ruleSources';const a=document.createElement('a');a.href=r.source;a.textContent=r.label+' ↗';a.target='_blank';a.rel='noopener';links.append(a);body.append(links);}
+result.append(icon,body);
+}
+function reset(){show({status:'neutral',title:'Details changed · check again',reason:'Compare the selected details with both sides of the coin, then check.'});}
+denomination.addEventListener('change',()=>{design.replaceChildren();const blank=document.createElement('option');blank.value='';blank.textContent=denomination.value?'Choose design':'Choose denomination first';design.append(blank);for(const [value,label] of definitions[denomination.value]||[]){const o=document.createElement('option');o.value=value;o.textContent=label;design.append(o);}design.disabled=!denomination.value;reset();});
+year.addEventListener('input',reset);design.addEventListener('change',reset);
+document.getElementById('coinForm').addEventListener('submit',event=>{event.preventDefault();show(checkCoin(denomination.value,year.value.trim(),design.value));});
+})();
+</script>
+</body></html>
